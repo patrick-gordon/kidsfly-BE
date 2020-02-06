@@ -33,7 +33,7 @@ exports.up = function(knex) {
         
     })
 
-    .createTable('kids_fly_connector', tbl => {
+    .createTable('assistant', tbl => {
       tbl.increments()
 
       tbl.string('email', 50)
@@ -50,17 +50,17 @@ exports.up = function(knex) {
     .createTable('trip', tbl => {
         tbl.increments();
 
-        tbl.integer('traveler_id')
+        tbl.integer('trip_traveler_id')
           .unsigned()
           .notNullable()
           .references('id')
           .inTable('travelers')
 
-        tbl.integer('kids_fly_connector_id')
+        tbl.integer('trip_assistant_id')
           .unsigned()
           .notNullable()
           .references('id')
-          .inTable('kids_fly_connector')
+          .inTable('assistant')
 
           tbl.text("trip_name", 128).notNullable();
 
@@ -78,10 +78,10 @@ exports.up = function(knex) {
     })
 
     .createTable('flight_info', tbl => {
-      tbl.integer('flight_info_KFC_id')
+      tbl.integer('flight_info_assistant_id')
         .unsigned()
         .references('id')
-        .inTable('kids_fly_connector')
+        .inTable('assistant')
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
 
